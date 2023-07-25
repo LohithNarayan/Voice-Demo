@@ -20,8 +20,9 @@ params = {
   "type": "Department",
   "contact": {
     "firstName": "Marketing Q",
-    "email": "a.lohith@ringcentral.com"  }
+    "email": "marketing@example.com"  }
   }
-resp = platform.post('/restapi/v1.0/account/~/extension', params)
+#To read all members (user extensions) of a call queue:
+resp = platform.get('/restapi/v1.0//account/11111111/call-queues/22223333/members')
 
 print(resp.text())

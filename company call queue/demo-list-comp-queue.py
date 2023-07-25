@@ -11,17 +11,19 @@ rcsdk = SDK( os.environ.get('RC_CLIENT_ID'),
 platform = rcsdk.platform()
 try:
   platform.login( jwt=os.environ.get('RC_JWT') )
-
 except Exception as e:
   sys.exit("Unable to authenticate to platform: " + str(e))
 
-params = {
-    "extensionNumber": "307",
-  "type": "Department",
-  "contact": {
-    "firstName": "Marketing Q",
-    "email": "a.lohith@ringcentral.com"  }
-  }
-resp = platform.post('/restapi/v1.0/account/~/extension', params)
+try:
+    resp = platform.get('/restapi/v1.0/account/~/call-queues')
+    records = resp.json().records
+    if len(records) == 0:
+        print( f'No call queues were found for the current account' )
+    else:
+        for r in records:
+            print( f'Call queue: name = {r["name"]}, extension = {r["extension"]}' )
 
-print(resp.text())
+except Exception as e:
+    sys.exit( e )
+else:
+    sys.exit( 0 )

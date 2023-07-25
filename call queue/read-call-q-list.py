@@ -20,8 +20,8 @@ params = {
   "type": "Department",
   "contact": {
     "firstName": "Marketing Q",
-    "email": "a.lohith@ringcentral.com"  }
+    "email": "marketing@example.com"  }
   }
-resp = platform.post('/restapi/v1.0/account/~/extension', params)
+resp = platform.get('/restapi/v1.0/account/~/call-queues')
 
 print(resp.text())
